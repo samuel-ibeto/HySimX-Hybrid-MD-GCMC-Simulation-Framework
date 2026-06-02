@@ -5,7 +5,7 @@
 # Handles multiple molecule types defined in internal dictionary
 
 import sys
-
+#input section - must be edited for each species 
 # === Configuration: Molecule name ? (atoms per molecule, number of molecules in the system)
 molecules = {
     "PIM" : (1902, 10), # this should match the residue name  resname used in the gromacs topology for ease of use when running the md
@@ -16,6 +16,8 @@ molecules = {
 box_size = 7.0414   # Box size in nm
 input_xyz = "C-2PIM.out.xyz"
 output_gro = "output.gro"
+
+# end of input section 
 
 # === Step 1: Read XYZ and detect last frame ===
 with open(input_xyz, "r") as f:
