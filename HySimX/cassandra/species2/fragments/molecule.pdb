@@ -1,0 +1,9 @@
+TITLE      Title
+REMARK   1 File created by Agui 10.1.9
+HETATM    1  N           0      -5.689   1.546  -0.012                       N
+HETATM    2  IM          0      -4.520   1.903   0.288                       IM
+HETATM    3  N           0      -3.351   2.260   0.588                       N
+END
+CONECT    1    2
+CONECT    2    1    3
+CONECT    3    2

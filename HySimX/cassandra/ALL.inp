@@ -1,0 +1,132 @@
+! This is the input file for a short simulation of methane+CO2 adsorbed in MFI at 300K and 1.0 bar.
+
+# Run_Name
+C-2PIM.out
+!------------------------------------------------------------------------------
+
+# Sim_Type
+GCMC
+!------------------------------------------------------------------------------
+
+# Nbr_Species
+3
+!------------------------------------------------------------------------------
+
+# VDW_Style
+LJ cut_tail 12.0 
+!------------------------------------------------------------------------------
+
+# Charge_Style
+coul Ewald 12.0 0.00001
+!----------------------------------------"NONE" or "Coul Ewald cutoff accuracy"
+
+# Intra_Scaling
+0. 0. 0.0000 1.
+0. 0. 0.0000 1.
+0. 0. 0.0000 1. 
+
+!----------------------------------------------vdw, coul lines for each species
+
+# Mixing_Rule
+LB
+!---------------------------------------------------------------LB or geometric
+
+# Seed_Info
+2037633371 3791107482
+!------------------------------------------------------------------------------
+
+# Rcutoff_Low
+0.5
+!----------------------------------------------------------------------Angstrom
+
+# Molecule_Files
+C-2PIM.mcf 1
+Tf2N.mcf  400
+CO2.mcf   1000
+!----------------------------------------------------------one line per species
+
+# Box_Info
+1
+cubic
+69.1954
+!-------------------------------------------------------line 1: number of boxes
+!--------------------------------------------------------------line 2: box type
+!-------------------------------------------------line 3: box size in Angstroms
+
+# Temperature_Info
+298.
+!------------------------------------------------------------------------Kelvin
+
+# Chemical_Potential_Info
+none  none  -40.3
+!----------------------------------------- muTf2N, muCo2, Polymer do not need mu
+!------------------------------------------------------------------------kJ/mol
+
+# Move_Probability_Info
+
+# Prob_Translation
+0.17
+0.0  0.0  3.0
+
+# Prob_Rotation
+0.17
+0.0  0.0  10.0
+
+# Prob_Insertion
+0.33
+none none cbmc
+
+# Prob_Deletion
+0.33
+
+# Done_Probability_Info
+!---------------------one line for each box and one entry/line for each species
+
+# Start_Type
+add_to_config 1 400 0 npt-run2.xyz 0  0  0
+!------read_config 400 135 1 1 pl62_a7.xyz
+!------------------------------------------------------------------------------
+!--------add_to_config 0 0 1  MFI8uc.xyz  2 5 0 
+
+# Run_Type
+Equilibration   100
+!--------------------------Equilibration: update each 100 steps
+!---------------------------Production: report success ratio for each move type
+
+# Average_Info
+1
+!------------------------------------------------------------ 0 == yes, 1 == no
+
+# Simulation_Length_Info
+Units        Steps
+Prop_Freq    5
+Coord_Freq   1
+Run          50
+!# Done_Simulation_Length_Info
+!-------------------------------------- output properties each 500 steps; 
+!--------------------------------------output XYZ each 500000 run 1000 steps
+
+# Property_Info 1
+Energy_Total
+Nmols
+pressure
+energy_intra
+enthalpy
+volume
+density
+mass_density
+
+!------------------------------------------------------------------------------
+
+# Fragment_Files
+species3/frag1/frag1.dat  1
+!---------------------------------------------------------one line per fragment
+
+# CBMC_Info
+kappa_ins 12
+kappa_rot 0
+kappa_dih 12
+rcut_cbmc 6.5
+!------------------------------------------------------------------------------
+
+END

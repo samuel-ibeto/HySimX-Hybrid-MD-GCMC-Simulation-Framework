@@ -1,0 +1,35 @@
+# Run_Name
+species3_mcf_gen
+
+# Sim_Type
+MCF_Gen
+
+# Nbr_Species
+1
+
+# VDW_Style
+LJ minimum_image
+
+# Rcutoff_Low
+1.0
+
+# Mixing_Rule
+LB
+
+
+# Charge_Style
+coul minimum_image
+
+# Intra_Scaling
+!----------------------------------------------vdw, coul lines for each species
+
+
+# Molecule_Files
+../../CO2.mcf 50
+
+# Box_Info
+1
+CUBIC
+30.0 30.0 30.0
+
+END
