@@ -1,0 +1,68 @@
+# config.yml
+
+cycles: 5
+
+# Start files (The start_conf.gro + start_conf.tpr is used as the authoritative start of the run)
+start:
+  gro: "input/start_conf.gro"
+  tpr: "input/start_conf.tpr"
+
+# Executables
+executables:
+  gmx: "gmx"                                                                            #path to gromacs
+  cassandra: "/data3/samuel/PACKAGES/myCassandra/Cassandra-1.3.1/bin/cassandra.exe"     #path to cassandra
+  obabel: "/home/samuel/openbabel/bin/obabel"                                           #path to obabel
+  python: "python"                                                                      # path to python executable to call xyz_to_gro.py
+
+# Cassandra related
+cassandra:
+  cass_inp: "cassandra/ALL.inp"                                   #cassandra input files - rename ALL.inp to your preferred input file name
+  species_folder_prefix: "species"                               # species1, species2, ...
+  completion_string: "*****Cassandra simulation complete*****"  # the code searches for this string to end the gcmc run before starting the next md run 
+  extra_failure_triggers:                                      #these are extra strings to determine what could cause cassandra to fail, the user can add more if detected
+    - "electrostatics cannot be computed"
+    - "bad atom type"
+  
+  prp_pattern: "*.prp"
+
+# GROMACS / MD
+gromacs:
+  topology: "gromacs/system.top"
+  min_mdp: "gromacs/min.mdp"
+  md_mdp: "gromacs/npt.mdp"
+
+  # Extra flags appended to "gmx mdrun" The -ntomp was added here so that the user can easily change the number of processors to use depending on availability 
+  # Each argument must be a separate list item
+  md_extra_args:
+    - "-ntomp"
+    - "16"              #change this based on the number of processors to use
+    # Example: additional args if needed later not needed as was already fixed in the main script function (run_gromacs_min_md)
+    # - "-nb"
+    # - "gpu"
+    # - "-pme"
+    # - "gpu"
+
+# xyz_to_gro script (will be edited in-place as needed)
+xyz_to_gro:
+  script: "scripts/xyz_to_gro.py"
+  # variable names to search/replace - keep if your script uses different names
+  molecules_dict_name: "molecules"
+  box_var_name: "box_size"
+  output_var_name: "output_gro"
+
+# Molecules mapping (must match EXACT names in ALL.inp and system.top)
+molecules:
+  mapping:
+    C_2PIM20: "C-2PIM.mcf"
+    TF      : "Tf2N.mcf"
+    CO2     : "CO2.mcf"
+    
+  adsorbent:
+    - C_2PIM20
+    - TF
+    
+  gases:
+    - CO2
+
+  
+backup: false
