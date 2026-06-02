@@ -101,12 +101,11 @@ This section provides a brief overview of how to use the HySimX framework. A wor
 Before launching extended production runs, it is strongly recommended to perform a short single-cycle test run to verify that the input parameters, file paths, and workflow settings are correctly configured. This is particularly important for complex or multicomponent systems where small setup inconsistencies may lead to errors or unintended simulation behavior.
 
 ### **1. Edit the configuration file**
-Update the simulation settings in `config.yml` before starting a run.
-
-```bash
-nano config.yml
-```
-Next make sure all the required 
+- Update the simulation settings in `config.yml` before starting a run.
+- Edit the input section in the converter `scripts/xyz_to_gro.py` to your system specifics. This is very important for molecule count and update after uptake.
+- Insert the various Cassandra and Gromacs input files into their respective directories.
+- Insert the start file (`.gro` and `.tpr` of the equilibrated host structure).
+  
 ### **2. Run the workflow**
 To start a new simulation workflow, run:
 ```bash
